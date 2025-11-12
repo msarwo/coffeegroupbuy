@@ -116,6 +116,7 @@ Update backend `.env`:
 PORT=5000
 SERVEONYX_EMAIL=your-email@example.com
 SERVEONYX_PASSWORD=your-password
+PORT=5000
 VENMO_USERNAME=your-venmo-username
 NODE_ENV=production
 ```

@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 import axios from 'axios';
 import './App.css';
 
@@ -11,12 +11,7 @@ function App() {
 
   const API_BASE = process.env.REACT_APP_API_URL || 'http://localhost:5000';
 
-  useEffect(() => {
-    fetchProducts();
-    fetchPaymentInfo();
-  }, []);
-
-  const fetchProducts = async () => {
+  const fetchProducts = useCallback(async () => {
     try {
       setLoading(true);
       setError('');
@@ -28,16 +23,21 @@ function App() {
     } finally {
       setLoading(false);
     }
-  };
+  }, [API_BASE]);
 
-  const fetchPaymentInfo = async () => {
+  const fetchPaymentInfo = useCallback(async () => {
     try {
       const response = await axios.get(`${API_BASE}/api/payment-info`);
       setPaymentInfo(response.data);
     } catch (err) {
       console.error('Error fetching payment info:', err);
     }
-  };
+  }, [API_BASE]);
+
+  useEffect(() => {
+    fetchProducts();
+    fetchPaymentInfo();
+  }, [fetchProducts, fetchPaymentInfo]);
 
   const addToCart = (product) => {
     const existingItem = cart.find(item => item.name === product.name);

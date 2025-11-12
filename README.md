@@ -5,7 +5,7 @@ A full-stack web application for wholesale coffee group buying with Venmo paymen
 ## Features
 
 ✨ **Product Display**
-- Automatically scrapes coffee products from serveonyx.com
+- Automatically scrapes coffee products from Onyx Coffee Lab (onyxcoffeelab.com)
 - Displays real-time pricing with 5% markup applied
 - Beautiful responsive product grid layout
 - Product images and details
@@ -34,7 +34,7 @@ A full-stack web application for wholesale coffee group buying with Venmo paymen
 coffeegroupbuy/
 ├── backend/
 │   ├── scrapers/
-│   │   └── serveonyx.js      # Serveonyx web scraper
+│   │   └── serveonyx.js      # Onyx Coffee Lab web scraper
 │   ├── server.js              # Express server
 │   ├── .env                   # Environment variables
 │   └── package.json           # Backend dependencies
@@ -105,6 +105,18 @@ npm start
 
 The frontend will open on `http://localhost:3000`
 
+### GitHub Pages Deployment
+
+You can deploy the frontend to GitHub Pages. The repository already includes a GitHub Actions workflow that builds the React app and deploys `frontend/build` to GitHub Pages on pushes to the `main` branch.
+
+Steps:
+
+1. Ensure your repository is pushed to GitHub and `main` is the branch you want to publish from.
+2. (Optional) Edit `frontend/package.json` `homepage` field if you prefer an absolute URL (default is `.` for relative paths).
+3. Push to `main`. The Actions workflow `.github/workflows/deploy-pages.yml` will run and publish the site to GitHub Pages.
+
+After the workflow completes, GitHub Pages will serve the site from the repository's Pages settings (for user/repo Pages or organization Pages). If you need a custom URL or a different branch, update repository settings accordingly.
+
 ## API Endpoints
 
 ### `GET /api/products`
@@ -141,7 +153,7 @@ Gets Venmo payment information.
 
 ## How It Works
 
-1. **Product Scraping**: The backend uses Puppeteer to automatically log into serveonyx.com and extract all available coffee products with pricing.
+1. **Product Scraping**: The backend uses Puppeteer to automatically log into onyxcoffeelab.com and extract all available coffee products with pricing.
 
 2. **Price Markup**: All prices are automatically increased by 5% to account for fees.
 
@@ -184,12 +196,12 @@ REACT_APP_API_URL=http://localhost:5000
 
 ### Products not loading?
 - Check that backend is running on port 5000
-- Verify Serveonyx credentials in `.env`
+- Verify Onyx Coffee Lab credentials in `.env`
 - Check browser console for CORS errors
 
 ### Scraping fails?
 - Verify internet connection
-- Check Serveonyx website is accessible
+- Check Onyx Coffee Lab website is accessible
 - Ensure credentials are correct
 - Check backend logs for detailed errors
 

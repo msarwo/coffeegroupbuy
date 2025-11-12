@@ -8,8 +8,8 @@ Your full-stack coffee group buying website has been successfully created with a
 
 ### Backend (Express.js)
 - REST API server with CORS support
-- Web scraper for serveonyx.com using Puppeteer
-- Automatic login to your Serveonyx account
+- Web scraper for onyxcoffeelab.com using Puppeteer
+- Automatic login to your Onyx Coffee Lab account
 - Product extraction with pricing
 - 5% markup automatically applied
 - 1-hour product caching for performance
@@ -25,7 +25,7 @@ Your full-stack coffee group buying website has been successfully created with a
 - Clean, intuitive interface
 
 ### Key Features Implemented
-✅ Scrapes all coffee from serveonyx.com
+✅ Scrapes all coffee from onyxcoffeelab.com
 ✅ Adds 5% markup to all prices
 ✅ Shows original price crossed out
 ✅ Full shopping cart functionality
@@ -40,7 +40,7 @@ Your full-stack coffee group buying website has been successfully created with a
 coffeegroupbuy/
 ├── backend/
 │   ├── scrapers/
-│   │   └── serveonyx.js          # Web scraper for Serveonyx
+│   │   └── serveonyx.js          # Web scraper for Onyx Coffee Lab
 │   ├── server.js                 # Express API server
 │   ├── .env                      # Environment variables (configured)
 │   ├── .env.example              # Example environment file
@@ -112,7 +112,7 @@ npm start
 
 ### 4. Use the App!
 
-- Products automatically load from Serveonyx
+- Products automatically load from Onyx Coffee Lab
 - Add items to cart
 - Proceed to payment via Venmo
 
@@ -147,7 +147,7 @@ PORT=5000
 
 1. **User visits website** → `http://localhost:3000`
 2. **Clicks "Refresh Products"** → Frontend sends request
-3. **Backend scrapes Serveonyx** → Puppeteer logs in and extracts products
+3. **Backend scrapes Onyx Coffee Lab** → Puppeteer logs in and extracts products
 4. **Prices increase 5%** → Markup applied automatically
 5. **Products display** → Beautiful grid with images
 6. **User shops** → Add items, adjust quantities

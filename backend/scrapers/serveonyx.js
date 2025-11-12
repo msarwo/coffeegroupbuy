@@ -14,26 +14,63 @@ async function scrapeServeonyx(email, password) {
     await page.setViewport({ width: 1280, height: 720 });
 
     // Navigate to login page
-    console.log('Navigating to Serveonyx...');
-    await page.goto('https://serveonyx.com/login', {
+    console.log('Navigating to Onyx Coffee Lab...');
+    await page.goto('https://onyxcoffeelab.com/account/login', {
       waitUntil: 'networkidle2',
       timeout: 30000
     });
 
-    // Fill in login credentials
-    console.log('Logging in...');
-    await page.type('input[type="email"]', email, { delay: 50 });
-    await page.type('input[type="password"]', password, { delay: 50 });
-    
-    // Click login button
-    await page.click('button[type="submit"]');
-    
-    // Wait for navigation
-    await page.waitForNavigation({ waitUntil: 'networkidle2', timeout: 30000 });
+    // Try filling in login credentials if the login form exists.
+    console.log('Attempting login (if login form present)...');
+    try {
+      const emailSelectors = ['input[type="email"]', 'input[name="email"]', 'input#email'];
+      const passSelectors = ['input[type="password"]', 'input[name="password"]', 'input#password'];
+      const submitSelectors = ['button[type="submit"]', 'input[type="submit"]', 'button.login-button', 'button[aria-label="Log in"]'];
+
+      let emailSel = null;
+      for (const s of emailSelectors) {
+        if (await page.$(s)) { emailSel = s; break; }
+      }
+
+      let passSel = null;
+      for (const s of passSelectors) {
+        if (await page.$(s)) { passSel = s; break; }
+      }
+
+      if (emailSel && passSel) {
+        await page.type(emailSel, email, { delay: 50 });
+        await page.type(passSel, password, { delay: 50 });
+
+        // Try clicking a submit button if present
+        let clicked = false;
+        for (const s of submitSelectors) {
+          const btn = await page.$(s);
+          if (btn) {
+            try {
+              await btn.click();
+              clicked = true;
+              break;
+            } catch (e) {
+              // ignore click failure and try next
+            }
+          }
+        }
+
+        if (clicked) {
+          await page.waitForNavigation({ waitUntil: 'networkidle2', timeout: 30000 }).catch(() => {});
+        } else {
+          console.log('Login form found but no clickable submit button; continuing without explicit click.');
+        }
+      } else {
+        console.log('Login form selectors not found, continuing without login.');
+      }
+    } catch (err) {
+      console.log('Login attempt failed or not required, continuing.');
+    }
 
     // Navigate to products/shop page
     console.log('Fetching products...');
-    await page.goto('https://serveonyx.com/shop', {
+    await page.goto('https://onyxcoffeelab.com/collections/coffee', {
       waitUntil: 'networkidle2',
       timeout: 30000
     });

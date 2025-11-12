@@ -25,7 +25,7 @@ app.get('/api/products', async (req, res) => {
       return res.json(productsCache);
     }
 
-    // Scrape fresh data
+    // Scrape fresh data from Onyx Coffee Lab
     const products = await scrapeServeonyx(
       process.env.SERVEONYX_EMAIL,
       process.env.SERVEONYX_PASSWORD

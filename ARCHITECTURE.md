@@ -38,7 +38,7 @@
 │  │  ┌──── Product Scraper ────┐                             │  │
 │  │  │ Puppeteer              │                             │  │
 │  │  │ • Launches browser     │                             │  │
-│  │  │ • Logs into Serveonyx  │  ──► serveonyx.com         │  │
+│  │  │ • Logs into Onyx Coffee Lab  │  ──► onyxcoffeelab.com         │  │
 │  │  │ • Extracts products    │  (Wholesale Coffee)         │  │
 │  │  │ • Applies 5% markup    │                             │  │
 │  │  └────────────────────────┘                             │  │
@@ -87,14 +87,14 @@
        │ Cache expired?
        ├─ NO → Return cached data
        │
-       └─ YES → Scrape Serveonyx
+       └─ YES → Scrape Onyx Coffee Lab
               ↓
          ┌─────────────────┐
          │   Puppeteer     │
          │ Browser Control │
          └────────┬────────┘
                   │
-                  ├─ Navigate to https://serveonyx.com
+                  ├─ Navigate to https://onyxcoffeelab.com/account/login
                   │
                   ├─ Login with:
                   │  • Email: msarwo@fb.com
@@ -227,7 +227,7 @@ backend/
     └── serveonyx.js
         ├── Uses → Puppeteer
         ├── Reads → .env credentials
-        └── Scrapes → https://serveonyx.com
+        └── Scrapes → https://onyxcoffeelab.com/collections/coffee
 
 frontend/
 ├── src/
@@ -270,7 +270,7 @@ frontend/
   price: 25.50,                           // Number (with 5% markup)
   originalPrice: 24.29,                   // Number (original)
   markup: 0.05,                           // Number (0.05 = 5%)
-  url: "https://serveonyx.com/product/1", // String
+  url: "https://onyxcoffeelab.com/products/example", // String
   image: "https://..."                    // String (image URL)
 }
 ```
@@ -315,7 +315,7 @@ Check cache validity
 If valid: Return cached JSON
 If invalid: Run scraper
     ↓
-Puppeteer scrapes Serveonyx
+Puppeteer scrapes Onyx Coffee Lab
     ↓
 Apply 5% markup
     ↓
@@ -368,7 +368,7 @@ Examples:
 ```
 First Load:
   ├─ API request
-  ├─ Backend scrapes Serveonyx (5-10 seconds)
+  ├─ Backend scrapes Onyx Coffee Lab (5-10 seconds)
   ├─ Apply 5% markup
   ├─ Store in cache
   └─ Return to frontend
@@ -381,7 +381,7 @@ Within 1 Hour:
 
 After 1 Hour:
   ├─ API request
-  ├─ Cache expired → Re-scrape Serveonyx
+  ├─ Cache expired → Re-scrape Onyx Coffee Lab
   ├─ Update cache
   └─ Return to frontend
 

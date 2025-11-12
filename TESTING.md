@@ -240,7 +240,7 @@ scrapeServeonyx('msarwo@fb.com', 'coffeeatmeta')
 
 #### Issue: Products Empty
 **Solution:**
-- Check Serveonyx credentials
+- Check Onyx Coffee Lab credentials
 - Verify website is accessible
 - Check backend logs for scraping errors
 - Try refresh instead of cached data
@@ -265,7 +265,7 @@ Create `backend/tests/scrapers.test.js`:
 ```javascript
 const { scrapeServeonyx } = require('../scrapers/serveonyx');
 
-describe('Serveonyx Scraper', () => {
+describe('Onyx Coffee Lab Scraper', () => {
   test('should return array of products', async () => {
     const products = await scrapeServeonyx(
       'test@example.com',

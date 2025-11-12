@@ -11,7 +11,7 @@ http://localhost:5000
 
 **Endpoint:** `GET /api/products`
 
-**Description:** Fetches all coffee products from Serveonyx with 5% markup applied. Results are cached for 1 hour.
+**Description:** Fetches all coffee products from Onyx Coffee Lab with 5% markup applied. Results are cached for 1 hour.
 
 **Query Parameters:** None
 
@@ -23,7 +23,7 @@ http://localhost:5000
     "price": 25.50,
     "originalPrice": 24.29,
     "markup": 0.05,
-    "url": "https://serveonyx.com/product/...",
+    "url": "https://onyxcoffeelab.com/products/...",
     "image": "https://..."
   },
   {
@@ -31,7 +31,7 @@ http://localhost:5000
     "price": 23.10,
     "originalPrice": 22.00,
     "markup": 0.05,
-    "url": "https://serveonyx.com/product/...",
+    "url": "https://onyxcoffeelab.com/products/...",
     "image": "https://..."
   }
 ]
@@ -52,7 +52,7 @@ curl http://localhost:5000/api/products
 
 **Endpoint:** `POST /api/products/refresh`
 
-**Description:** Forces a fresh scrape of products from Serveonyx, bypassing the cache.
+**Description:** Forces a fresh scrape of products from Onyx Coffee Lab, bypassing the cache.
 
 **Request Body:** None
 
@@ -111,17 +111,17 @@ All error responses follow this format:
 1. **Scraping Failed**
    - Status: 500
    - Message: "Failed to fetch products"
-   - Cause: Cannot connect to Serveonyx or login failed
+   - Cause: Cannot connect to Onyx Coffee Lab or login failed
 
 2. **Invalid Credentials**
    - Status: 500
    - Message: "Failed to fetch products"
-   - Cause: Serveonyx email/password incorrect
+   - Cause: Onyx Coffee Lab email/password incorrect
 
 3. **Connection Error**
    - Status: 500
    - Message: "Failed to fetch products"
-   - Cause: No internet connection or Serveonyx is down
+   - Cause: No internet connection or Onyx Coffee Lab is down
 
 ---
 
@@ -133,7 +133,7 @@ All error responses follow this format:
 {
   name: string;           // Product name
   price: number;          // Price with 5% markup
-  originalPrice: number;  // Price from Serveonyx
+  originalPrice: number;  // Price from Onyx Coffee Lab
   markup: number;         // Markup percentage (0.05 = 5%)
   url: string;            // Product URL
   image: string;          // Product image URL
@@ -213,7 +213,7 @@ print(payment_info)
 - Products are cached for **1 hour** (3600000 milliseconds)
 - Subsequent requests within this period return cached data
 - Use the `/api/products/refresh` endpoint to force a fresh scrape
-- Cache improves performance and reduces load on Serveonyx
+- Cache improves performance and reduces load on Onyx Coffee Lab
 
 ---
 
@@ -274,9 +274,9 @@ Currently, **no authentication** is required for API endpoints.
 
 **Check:**
 1. Backend server is running
-2. Serveonyx credentials in `.env` are correct
+2. Onyx Coffee Lab credentials in `.env` are correct
 3. Internet connection is active
-4. Serveonyx website is accessible
+4. Onyx Coffee Lab website is accessible
 
 **Debug:**
 ```bash
@@ -284,15 +284,15 @@ Currently, **no authentication** is required for API endpoints.
 cd backend
 npm start
 
-# Test Serveonyx access
-curl https://serveonyx.com
+# Test Onyx Coffee Lab access
+curl https://onyxcoffeelab.com
 ```
 
 ### Long Response Time
 
 **Possible Causes:**
 1. First request (scraping takes time)
-2. Serveonyx website is slow
+2. Onyx Coffee Lab website is slow
 3. Network latency
 
 **Solutions:**
@@ -303,7 +303,7 @@ curl https://serveonyx.com
 ### Missing Product Images
 
 **Possible Causes:**
-1. Serveonyx uses lazy loading
+1. Onyx Coffee Lab uses lazy loading
 2. Image URLs are relative (not absolute)
 
 **Solution:** Modify scraper to handle image loading properly

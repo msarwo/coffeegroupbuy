@@ -52,7 +52,7 @@ Visit `http://localhost:3000` in your browser!
 1. **Frontend** loads at `http://localhost:3000`
 2. **Backend API** runs at `http://localhost:5000`
 3. Frontend fetches coffee products from API
-4. Backend scrapes Serveonyx with your credentials
+4. Backend scrapes Onyx Coffee Lab with your credentials
 5. Products show with 5% markup applied
 6. Add items to cart and proceed to Venmo payment
 
@@ -86,7 +86,7 @@ Edit `backend/.env` and change PORT
 Ensure backend is running before starting frontend
 
 **Products not loading?**
-Check backend logs, verify Serveonyx credentials in `.env`
+Check backend logs, verify Onyx Coffee Lab credentials in `.env`
 
 ---
 

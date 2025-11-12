@@ -10,7 +10,7 @@ Located: `backend/.env`
 # Server Port
 PORT=5000
 
-# Serveonyx Credentials
+# Onyx Coffee Lab Credentials
 SERVEONYX_EMAIL=msarwo@fb.com
 SERVEONYX_PASSWORD=coffeeatmeta
 
@@ -26,8 +26,8 @@ NODE_ENV=development
 | Variable | Description | Example | Required |
 |----------|-------------|---------|----------|
 | PORT | Express server port | 5000 | Yes |
-| SERVEONYX_EMAIL | Email for Serveonyx login | msarwo@fb.com | Yes |
-| SERVEONYX_PASSWORD | Password for Serveonyx | coffeeatmeta | Yes |
+| SERVEONYX_EMAIL | Email for Onyx Coffee Lab login | msarwo@fb.com | Yes |
+| SERVEONYX_PASSWORD | Password for Onyx Coffee Lab | coffeeatmeta | Yes |
 | VENMO_USERNAME | Your Venmo username | @yourname | Yes |
 | NODE_ENV | Environment mode | development/production | No |
 
@@ -113,7 +113,7 @@ If scraping is slow or timing out:
 
 ```javascript
 // Increase timeout
-await page.goto('https://serveonyx.com/login', {
+await page.goto('https://onyxcoffeelab.com/account/login', {
   waitUntil: 'networkidle2',
   timeout: 60000  // Increased from 30000
 });
@@ -389,7 +389,7 @@ METRICS_ENABLED=true
 ## Configuration Checklist
 
 Before running:
-- [ ] Backend `.env` has correct Serveonyx credentials
+- [ ] Backend `.env` has correct Onyx Coffee Lab credentials
 - [ ] Backend `.env` has Venmo username
 - [ ] Frontend `.env` has correct API URL
 - [ ] Port 5000 is available (or changed in `.env`)
