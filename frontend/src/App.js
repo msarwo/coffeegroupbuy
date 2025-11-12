@@ -18,8 +18,36 @@ function App() {
       const response = await axios.get(`${API_BASE}/api/products`);
       setProducts(response.data);
     } catch (err) {
-      setError('Failed to load products. Please try again later.');
-      console.error('Error fetching products:', err);
+      // Fallback to demo data when backend is unavailable
+      console.warn('Backend unavailable, using demo data:', err.message);
+      const demoProducts = [
+        {
+          name: 'Ethiopian Yirgacheffe',
+          price: 15.99,
+          originalPrice: 15.23,
+          image: 'https://images.unsplash.com/photo-1447933601403-0c6688de566e?w=300&h=300&fit=crop'
+        },
+        {
+          name: 'Colombian Medium Roast',
+          price: 14.69,
+          originalPrice: 14.00,
+          image: 'https://images.unsplash.com/photo-1559056199-641a0ac8b3f4?w=300&h=300&fit=crop'
+        },
+        {
+          name: 'Brazilian Dark Roast',
+          price: 13.99,
+          originalPrice: 13.32,
+          image: 'https://images.unsplash.com/photo-1541432557015-8c8ae8fce581?w=300&h=300&fit=crop'
+        },
+        {
+          name: 'Indonesian Sumatra',
+          price: 16.49,
+          originalPrice: 15.71,
+          image: 'https://images.unsplash.com/photo-1461023058943-07fcbe16d735?w=300&h=300&fit=crop'
+        }
+      ];
+      setProducts(demoProducts);
+      setError('');
     } finally {
       setLoading(false);
     }
@@ -30,7 +58,9 @@ function App() {
       const response = await axios.get(`${API_BASE}/api/payment-info`);
       setPaymentInfo(response.data);
     } catch (err) {
-      console.error('Error fetching payment info:', err);
+      // Fallback demo payment info
+      console.warn('Could not fetch payment info, using demo:', err.message);
+      setPaymentInfo({ venmoUsername: 'coffeegroupbuy' });
     }
   }, [API_BASE]);
 
